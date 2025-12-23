@@ -13,6 +13,23 @@
 - This project demonstrates the transformation of an intentionally insecure cloud-native application into a secure, observable, and scalable architecture using Google Cloud managed services.
 - The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
 
+## Live Deployment Proof (Google Cloud)
+
+This application is deployed live on Google Cloud using a fully managed serverless architecture.
+
+- Platform: Google Cloud Run (europe-west1)
+- CI/CD: GitHub → Cloud Build → Cloud Run
+- Container: Docker
+- Runtime: Python (Flask)
+- Port configuration: Uses $PORT as required by Cloud Run
+- Scaling: Auto-scaling enabled with scale-to-zero
+- Observability: Cloud Logging enabled and verified
+
+The deployment was validated by:
+- Successful Cloud Build pipeline execution
+- Active Cloud Run service with public URL
+- Verified request logs in Cloud Logging
+
 ## Before vs After Comparison
 
 The table below summarizes the architectural improvements made during the
