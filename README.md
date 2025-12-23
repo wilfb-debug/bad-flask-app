@@ -13,6 +13,22 @@
 - This project demonstrates the transformation of an intentionally insecure cloud-native application into a secure, observable, and scalable architecture using Google Cloud managed services.
 - The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
 
+## Before vs After Comparison
+
+The table below summarizes the architectural improvements made during the
+transition from the initial insecure deployment to the hardened cloud-native
+architecture.
+
+| Area | Before (Insecure) | After (Secure) |
+|----|------------------|---------------|
+| Secrets Management | Hardcoded in source code and exposed via HTTP responses | Stored in Google Secret Manager and accessed at runtime |
+| IAM & Access Control | Default permissions with no access restrictions | Dedicated service account with least-privilege access |
+| Configuration | Static configuration embedded in application code | Environment-based configuration managed by Cloud Run |
+| Observability | No logging or monitoring | Cloud Logging and Cloud Monitoring enabled |
+| Deployment | Manual and error-prone | Automated CI/CD using Cloud Build |
+| Scalability | Implicit and unmanaged | Serverless autoscaling with Cloud Run |
+| Security Posture | High risk of credential exposure | Production-aligned cloud security best practices |
+
 ## High-Level Architecture
 - The application is deployed on Google Cloud Run, a fully managed serverless compute platform. Deployment is automated through a CI/CD pipeline using Cloud Build, with source code hosted in GitHub.
 - At runtime, the application retrieves sensitive configuration values from Google Secret Manager rather than storing them in source code. Access to secrets is tightly controlled using a least-privilege IAM service account assigned to the Cloud Run service.
