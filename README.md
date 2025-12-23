@@ -33,6 +33,20 @@ architecture.
 - The application is deployed on Google Cloud Run, a fully managed serverless compute platform. Deployment is automated through a CI/CD pipeline using Cloud Build, with source code hosted in GitHub.
 - At runtime, the application retrieves sensitive configuration values from Google Secret Manager rather than storing them in source code. Access to secrets is tightly controlled using a least-privilege IAM service account assigned to the Cloud Run service.
 
+## Threat Model
+
+This section highlights key security threats identified in the initial deployment
+and the mitigations applied in the hardened architecture.
+
+| Threat | Risk | Mitigation | GCP Service |
+|------|------|------------|------------|
+| Hardcoded secrets | Credential leakage | Store secrets securely and access them at runtime | Secret Manager |
+| Secrets exposed via HTTP | Data breach / incident | Never return secrets in responses; restrict access | Secret Manager + App code |
+| Over-privileged access | Unauthorized resource access | Dedicated service account with least privilege | IAM |
+| Misconfigured runtime/port | Service outage | Bind to `0.0.0.0` and read `PORT` env var | Cloud Run |
+| Lack of observability | Slow incident response | Centralized logs and metrics | Cloud Logging / Monitoring |
+| Manual deployments | Drift & human error | Automated CI/CD | Cloud Build |
+
 ## Core Components
 
 ### Cloud Run (Serverless Runtime)
