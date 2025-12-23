@@ -4,15 +4,12 @@
 *(Intentionally insecure deployment highlighting common cloud anti-patterns)*
 
 ![Initial Insecure Architecture](diagrams/architecture-insecure.png)
-### Initial Insecure Architecture
-![Initial Insecure Architecture](diagrams/architecture-insecure.png)
 
 ### Secure Cloud-Native Architecture
 *(Hardened architecture using Secret Manager, IAM least privilege, and observability)*
 
 ![Secure Cloud-Native Architecture](diagrams/architecture-secure.png)
-### Secure Cloud-Native Architecture
-![Secure Cloud-Native Architecture](diagrams/architecture-secure.png)
+
 - This project demonstrates the transformation of an intentionally insecure cloud-native application into a secure, observable, and scalable architecture using Google Cloud managed services.
 - The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
 
