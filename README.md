@@ -89,6 +89,18 @@ and the mitigations applied in the hardened architecture.
 - Applied threat modeling to identify cloud security risks and implemented least-privilege IAM mitigations.
 - Enabled centralized logging and monitoring using Cloud Logging and Cloud Monitoring for observability.
 
+## Project Structure
+
+```text
+.
+├── app.py                  # Flask application
+├── Dockerfile              # Container build definition
+├── requirements.txt        # Python dependencies
+├── diagrams/
+│   ├── architecture-before.png
+│   └── architecture-after.png
+└── README.md               # Project documentation
+
 ## Observability
 
 - Centralized logs using Google Cloud Logging
