@@ -4,6 +4,10 @@
 - The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
   
 ## Architecture Diagrams
+### Architectural Evolution Summary
+
+This project intentionally begins with an insecure baseline to demonstrate common cloud anti-patterns, including hardcoded secrets, public unauthenticated access, and manual deployments.  
+The final architecture applies cloud-native security and reliability principles using managed Google Cloud services, resulting in a secure, observable, and scalable production-ready design.
 
 ### Before: Insecure Baseline
 ![Insecure Baseline](diagrams/architecture-before.png)
@@ -62,7 +66,7 @@ architecture.
 This section highlights key security threats identified in the initial deployment
 and the mitigations applied in the hardened architecture.
 
-| Threat | Risk | Mitigation | GCP Service |
+| Threat | Risk | Mitigation | GCP Service | 
 |------|------|------------|------------|
 | Hardcoded secrets | Credential leakage | Store secrets securely and access them at runtime | Secret Manager |
 | Secrets exposed via HTTP | Data breach / incident | Never return secrets in responses; restrict access | Secret Manager + App code |
@@ -70,6 +74,9 @@ and the mitigations applied in the hardened architecture.
 | Misconfigured runtime/port | Service outage | Bind to `0.0.0.0` and read `PORT` env var | Cloud Run |
 | Lack of observability | Slow incident response | Centralized logs and metrics | Cloud Logging / Monitoring |
 | Manual deployments | Drift & human error | Automated CI/CD | Cloud Build |
+| Supply chain compromise | Malicious container deployed | CI/CD pipeline with controlled source + build logs | Cloud Build
+
+> Threat modeling was performed by identifying insecure defaults in the initial design and mapping each risk to a managed Google Cloud mitigation aligned with least-privilege and defense-in-depth principles.
 
 ## Observability
 
