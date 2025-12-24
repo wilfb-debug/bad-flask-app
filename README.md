@@ -4,6 +4,13 @@
 - The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
   
 ## Architecture Diagrams
+
+### Before: Insecure Baseline
+![Insecure Baseline](diagrams/architecture-before.png)
+
+### After: Hardened Cloud-Native Architecture
+![Hardened Architecture](diagrams/architecture-after.png)
+
 ### Initial Insecure Architecture
 *(Intentionally insecure deployment highlighting common cloud anti-patterns)*
 
