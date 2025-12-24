@@ -1,4 +1,8 @@
+# Secure Cloud Run Flask Application
 ## Architecture Overview
+- This project demonstrates the transformation of an intentionally insecure cloud-native application into a secure, observable, and scalable architecture using Google Cloud managed services.
+- The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
+  
 ## Architecture Diagrams
 ### Initial Insecure Architecture
 *(Intentionally insecure deployment highlighting common cloud anti-patterns)*
@@ -9,9 +13,6 @@
 *(Hardened architecture using Secret Manager, IAM least privilege, and observability)*
 
 ![Secure Cloud-Native Architecture](diagrams/architecture-secure.png)
-
-- This project demonstrates the transformation of an intentionally insecure cloud-native application into a secure, observable, and scalable architecture using Google Cloud managed services.
-- The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
 
 ## Live Deployment Proof (Google Cloud)
 
@@ -51,7 +52,6 @@ architecture.
 - At runtime, the application retrieves sensitive configuration values from Google Secret Manager rather than storing them in source code. Access to secrets is tightly controlled using a least-privilege IAM service account assigned to the Cloud Run service.
 
 ## Threat Model
-
 This section highlights key security threats identified in the initial deployment
 and the mitigations applied in the hardened architecture.
 
@@ -64,8 +64,26 @@ and the mitigations applied in the hardened architecture.
 | Lack of observability | Slow incident response | Centralized logs and metrics | Cloud Logging / Monitoring |
 | Manual deployments | Drift & human error | Automated CI/CD | Cloud Build |
 
-## Core Components
+## Observability
 
+- Centralized logs using Google Cloud Logging
+- Error simulation via `/crash` endpoint
+- Latency simulation via `/slow` endpoint
+- Logs used for debugging and incident response
+
+## Security
+
+- Cloud Run service secured with IAM authentication
+- Unauthenticated access disabled
+- Service-to-service access enforced via IAM
+
+## Identity and Access Management
+
+- Dedicated service account used by Cloud Run
+- Least-privilege permissions applied
+- Access limited to Secret Manager only
+
+## Core Components
 ### Cloud Run (Serverless Runtime)
 - Hosts the Flask application
 - Automatically scales based on incoming traffic
