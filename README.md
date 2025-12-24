@@ -1,4 +1,5 @@
 # Secure Cloud Run Flask Application
+
 ## Architecture Overview
 - This project demonstrates the transformation of an intentionally insecure cloud-native application into a secure, observable, and scalable architecture using Google Cloud managed services.
 - The initial version of the application intentionally demonstrated common cloud anti-patterns, including hardcoded secrets, exposed credentials via HTTP responses, and lack of observability. These issues were then systematically identified and remediated using cloud-native best practices.
@@ -59,10 +60,12 @@ architecture.
 | Security Posture | High risk of credential exposure | Production-aligned cloud security best practices |
 
 ## High-Level Architecture
+
 - The application is deployed on Google Cloud Run, a fully managed serverless compute platform. Deployment is automated through a CI/CD pipeline using Cloud Build, with source code hosted in GitHub.
 - At runtime, the application retrieves sensitive configuration values from Google Secret Manager rather than storing them in source code. Access to secrets is tightly controlled using a least-privilege IAM service account assigned to the Cloud Run service.
 
 ## Threat Model
+
 This section highlights key security threats identified in the initial deployment
 and the mitigations applied in the hardened architecture.
 
@@ -77,6 +80,14 @@ and the mitigations applied in the hardened architecture.
 | Supply chain compromise | Malicious container deployed | CI/CD pipeline with controlled source + build logs | Cloud Build
 
 > Threat modeling was performed by identifying insecure defaults in the initial design and mapping each risk to a managed Google Cloud mitigation aligned with least-privilege and defense-in-depth principles.
+
+## Resume Highlights
+
+- Designed and deployed a secure serverless application using Google Cloud Run with HTTPS ingress and autoscaling.
+- Implemented secret management using Google Secret Manager, eliminating hardcoded credentials from source code.
+- Built an automated CI/CD pipeline using Cloud Build triggered by GitHub commits.
+- Applied threat modeling to identify cloud security risks and implemented least-privilege IAM mitigations.
+- Enabled centralized logging and monitoring using Cloud Logging and Cloud Monitoring for observability.
 
 ## Observability
 
@@ -99,32 +110,38 @@ and the mitigations applied in the hardened architecture.
 
 ## Core Components
 ### Cloud Run (Serverless Runtime)
+
 - Hosts the Flask application
 - Automatically scales based on incoming traffic
 - Scales to zero when idle to reduce cost
 - Reads the application port from the PORT environment variable as required by Cloud Run
 
 ### Cloud Build (CI/CD)
+
 - Builds and deploys the container image automatically
 - Triggered from source control (GitHub)
 - Ensures consistent, repeatable deployments
 
 ### Secret Manager
+
 - Stores sensitive values such as database hostnames and passwords
 - Secrets are accessed at runtime only
 - No secrets are hardcoded or exposed in application responses
 
 ### Identity and Access Management (IAM)
+
 - Cloud Run uses a dedicated service account
 - Granted only secretmanager.versions.access
 - Follows the principle of least privilege
 
 ### Logging and Monitoring
+
 - Cloud Logging captures application and request logs
 - Cloud Monitoring provides metrics and visibility into runtime behavior
 - Enables faster debugging and operational awareness
 
 ## Security Improvements
+
 - The secure architecture addresses the following risks:
 - Secret exposure → Mitigated using Secret Manager and IAM
 - Misconfigured container ports → Resolved using environment-based configuration
@@ -132,6 +149,7 @@ and the mitigations applied in the hardened architecture.
 - Over-privileged access → Resolved using least-privilege service accounts
 
 ## Architectural Outcomes
+
 - Secrets are never exposed to end users
 - The application follows cloud-native security best practices
 - The system is scalable, observable, and cost-efficient
